@@ -1,0 +1,39 @@
+.sql-hl-keyword
+{
+  color: #FF3333;
+}
+
+.sql-hl-function
+{
+  color: #7ad9ff;
+}
+
+.sql-hl-number
+{
+  color: #ffba7a;
+}
+
+.sql-hl-string
+{
+  color: #99FF33;
+}
+
+.sql-hl-special
+{
+  color: #33FF33;
+}
+
+.sql-hl-bracket
+{
+  color: #ff9a46;
+}
+
+.sql-hl-comment
+{
+  color: #33FFFF;
+}
+
+.sql-hl-clear
+{
+  color: #3399FF;
+}

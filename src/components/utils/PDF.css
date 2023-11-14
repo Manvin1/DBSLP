@@ -1,0 +1,11 @@
+.pdfContainer
+{
+  background-color: transparent !important;
+}
+
+.pdfContainer__pdf
+{
+  background-color: var(--chakra-colors-secondaryFg) !important;
+  display: flex;
+  justify-content: center;
+}
