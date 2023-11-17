@@ -114,5 +114,4 @@ export default class Relation
   entitiesIds;
   cardinalities;
   canvas;
-  type="relation";
 }

@@ -11,8 +11,7 @@ function UnsupportedDevice() {
       h='100vh'
       alignItems='center'
       justifyContent='center'
-      textAlign='center'
-      >
+      textAlign='center'>
       <Text>
         Desculpe, mas o seu dispositivo não é suportado pela aplicação.
       </Text>

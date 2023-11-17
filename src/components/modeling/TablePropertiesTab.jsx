@@ -222,7 +222,18 @@ function TablePropertiesTab({ store, table, tables, associations }) {
                         onChange={(e) => {
                           const select = e.target;
                           const option = select.options[select.selectedIndex];
+
+                          if(constraint.type === ConstraintsType.foreign_key)
+                          {
+                            constraint.reference = null;
+                          }
+
                           constraint.type = option.value;
+
+                          if(option.value === ConstraintsType.foreign_key)
+                          {
+                            constraint.reference = new Reference({});
+                          }
                         }}
                         value={constraint.type}>
                         <option
@@ -262,7 +273,8 @@ function TablePropertiesTab({ store, table, tables, associations }) {
                       templateColumns='repeat(2, 1fr)'>
                       {
                         table.columns.map(column => (
-                          <>
+                          <Fragment
+                            key={column.id}>
                             <GridItem>
                               <FormLabel
                                 margin='0'
@@ -284,7 +296,7 @@ function TablePropertiesTab({ store, table, tables, associations }) {
                                 }}
                                 isChecked={constraint.columnsIds.includes(column.id)} />
                             </GridItem>
-                          </>
+                          </Fragment>
                         ))
                       }
                     </Grid>
@@ -310,7 +322,7 @@ function TablePropertiesTab({ store, table, tables, associations }) {
 
                               constraint.reference.tableId = option.value;
                             }}
-                            value={constraint.reference.tableId}>
+                            value={constraint.reference.tableId || ''}>
                             {
                               tables.map(table => (
                                 <option 
@@ -331,7 +343,8 @@ function TablePropertiesTab({ store, table, tables, associations }) {
                                   tables
                                     .find(table => table.id === constraint.reference.tableId)
                                     .columns.map(column => (
-                                      <>
+                                      <Fragment
+                                        key={column.id}>
                                         <GridItem>
                                           <FormLabel
                                             margin='0'
@@ -351,7 +364,7 @@ function TablePropertiesTab({ store, table, tables, associations }) {
                                             }}
                                             isChecked={constraint.reference.columnsIds.includes(column.id)} />
                                         </GridItem>
-                                      </>
+                                      </Fragment>
                                   ))
                                 }
                               </Grid>
@@ -453,7 +466,8 @@ function TablePropertiesTab({ store, table, tables, associations }) {
               </GridItem>
               {
                 table.columns.map(column => (
-                  <Fragment key={column.id}>
+                  <Fragment 
+                    key={column.id}>
                     <GridItem>
                       <Input
                         minWidth='100px'

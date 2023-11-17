@@ -194,7 +194,12 @@ function Sidebar() {
               gap='1em'
               alignItems='flex-start'>
               <Box as='nav'>
-                <UnorderedList listStyleType='none' margin='0'>
+                <UnorderedList 
+                  display='flex'
+                  flexDir='column'
+                  gap='1em'
+                  listStyleType='none' 
+                  margin='0'>
                   {
                     ROUTES.map(routeDetails => (
                       <ListItem
@@ -227,7 +232,12 @@ function Sidebar() {
               <SeparatorIcon boxSize={ICON_SIZE} flexShrink='0'/>
                 
               <Box>
-                <UnorderedList listStyleType='none' margin='0'>
+                <UnorderedList 
+                  display='flex'
+                  flexDir='column'
+                  gap='1em'
+                  listStyleType='none' 
+                  margin='0'>
                 {
                   SERVICES.map(serviceDetails => (
                     <ListItem

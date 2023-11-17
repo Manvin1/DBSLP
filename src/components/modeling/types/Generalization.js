@@ -130,5 +130,4 @@ export default class Generalization
   derivedsIds;
   genType;
   canvas;
-  type="generalization";
 }

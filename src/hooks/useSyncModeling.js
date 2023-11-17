@@ -1,8 +1,9 @@
-import { syncedStore, getYjsDoc } from "@syncedstore/core";
+import { getYjsDoc, syncedStore } from "@syncedstore/core";
 import { useSyncedStore } from "@syncedstore/react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WebsocketProvider } from 'y-websocket';
+import ConceptualStore from "../components/modeling/types/ConceptualStore";
+import LogicalStore from "../components/modeling/types/LogicalStore";
 
 const SOCKET_SERVER = import.meta.env.VITE_SOCKET_SERVER_URL;
 const DEFAULT_ROOM = '';
@@ -12,15 +13,8 @@ const store = syncedStore({
   logical: {}
 })
 
-store.conceptual.entities = [];
-store.conceptual.relations = [];
-store.conceptual.attributes = [];
-store.conceptual.generalizations = [];
-store.conceptual.connections = [];
-
-store.logical.tables = [];
-store.logical.associations = [];
-store.logical.connections = [];
+ConceptualStore(store.conceptual);
+LogicalStore(store.logical);
 
 /**
  * Criar um novo provedor de conexão.
@@ -48,6 +42,8 @@ function createProvider(room = DEFAULT_ROOM)
 
 /**
  * Hook para abstrair o documento compartilhado, o gerenciamento de seu ciclo de vida e suas operações.
+ * 
+ * Note que o documento, contudo, é um singleton e múltiplos Hooks manipulam o mesmo documento.
  */
 export function useSyncModeling()
 {

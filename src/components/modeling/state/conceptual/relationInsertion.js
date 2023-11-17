@@ -8,7 +8,6 @@
  * Toda reação *nunca* muda o estado, realizando uma auto transição interna.
  */
 
-import { assign } from "xstate";
 
 import { getRandomAnimal } from "../../api/randomGenerator";
 import CanvasDetails from "../../types/CanvasDetails";
@@ -17,10 +16,6 @@ import Relation from "../../types/Relation";
 import MachineEvents from "./MachineEvents";
 
 const defaultDimension = new Dimension(100, 100);
-
-const relationInsertionEntry = assign({
-  payload: {}
-});
 
 const relationInsertionHandleStageClick = (context, {payload}) => {
 
@@ -39,9 +34,8 @@ const relationInsertionHandleStageClick = (context, {payload}) => {
 }
 
 export default Object.freeze({
-  entry: relationInsertionEntry,
   on: {
-    [MachineEvents.STAGE_CLICK]: {
+    [MachineEvents.CONCEPTUAL_STAGE_CLICK]: {
       internal: true,
       actions: relationInsertionHandleStageClick,
     }

@@ -95,6 +95,7 @@ function NormalizationModal({isOpen, onClose}) {
           fontSize='xl'
           gap='1em'>
           <UnorderedList
+            margin='0'
             flex='1'
             padding='1em'
             overflowY='scroll'
@@ -163,6 +164,7 @@ function NormalizationModal({isOpen, onClose}) {
               </UnorderedList>
             ) : (
               <Text
+                padding='1em'
                 overflowY='scroll'
                 flex='2'>
                 Nenhuma Tabela Selecionada 

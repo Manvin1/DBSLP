@@ -16,7 +16,7 @@ function LogicalPropertiesTab() {
   const {store} = useAppContext();
 
   const [state, send] = useActor(toolMachineServices);
-  const selectedTarget = getSelectionTarget(state, store);
+  const selectedTarget = getSelectionTarget(state, send, store);
 
   if (!selectedTarget) {
     return (

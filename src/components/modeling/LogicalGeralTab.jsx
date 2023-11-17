@@ -23,7 +23,7 @@ function LogicalGeralTab() {
 
   const [state, send] = useActor(toolMachineServices);
   const [name, setName] = useState(EMPTY_VALUE)
-  const selectedTarget = getSelectionTarget(state, store);
+  const selectedTarget = getSelectionTarget(state, send, store);
 
   useEffect(() => {
     if (!selectedTarget || !selectedTarget.target.name)

@@ -36,15 +36,15 @@ export const PAGES = [
     title: 'Manual do Usuário',
     path: '/manualUsuario',
     type:'pdf',
-    data: '/ManualDoUsuarioDBSLP.pdf',
-    fileName: 'ManualDoUsuarioDBSLP'
+    data: '/ManuelDoUsuarioDBSLP.pdf',
+    fileName: 'ManuelDoUsuarioDBSLP'
   },
   {
     id: 4,
     title: 'Manual do Desenvolvedor',
     path: '/manualDesenvolvedor',
     type:'pdf',
-    data: '/ManualDoDesenvolvedor.pdf',
+    data: '/DocumentacaoDBSLP.pdf',
     fileName: 'DBSLP'
   }
 ];

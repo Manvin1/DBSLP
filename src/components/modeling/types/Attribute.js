@@ -33,7 +33,7 @@ export default class Attribute
    * @param {Attribute} attribute 
    * @param {MappedTypeDescription<{conceptual: {};logical: {};}} store 
    * 
-   * @returns {Object | null}
+   * @returns {Entity | Attribute | null}
    * 
    * @throws Se o tipo do possuidor for desconhecido.
    */

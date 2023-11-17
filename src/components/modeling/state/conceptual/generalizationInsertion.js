@@ -8,7 +8,6 @@
  * Toda reação *nunca* muda o estado, realizando uma auto transição interna.
  */
 
-import { assign } from "xstate";
 
 import CanvasDetails from "../../types/CanvasDetails";
 import Dimension from "../../types/Dimension";
@@ -16,12 +15,6 @@ import Generalization from "../../types/Generalization";
 import MachineEvents from "./MachineEvents";
 
 const defaultDimension = new Dimension(100, 100);
-
-const generalizationInsertionEntry = assign({
-  payload: {
-
-  }
-});
 
 const generalizationInsertionHandleStageClick = (context, {payload}) => {
 
@@ -36,9 +29,8 @@ const generalizationInsertionHandleStageClick = (context, {payload}) => {
 }
 
 export default Object.freeze({
-  entry: generalizationInsertionEntry,
   on: {
-    [MachineEvents.STAGE_CLICK]: {
+    [MachineEvents.CONCEPTUAL_STAGE_CLICK]: {
       internal: true,
       actions: generalizationInsertionHandleStageClick,
     }

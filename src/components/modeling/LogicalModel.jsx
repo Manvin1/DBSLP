@@ -8,6 +8,7 @@ import Association from './shapes/Association';
 import Connection from './shapes/Connection';
 import Table from './shapes/Table';
 import MachineEvents from './state/logical/MachineEvents';
+import GeralMachineEvents from './state/MachineEvents';
 import CanvasDetails from './types/CanvasDetails';
 import { ConnectionTipsType } from './types/Connection';
 
@@ -70,7 +71,7 @@ function LogicalModel({ size }) {
 
   function handleStageClick(e) {
     send({
-      type: MachineEvents.STAGE_CLICK,
+      type: MachineEvents.LOGICAL_STAGE_CLICK,
       payload: {
         store,
         target: e.target,
@@ -168,6 +169,7 @@ function LogicalModel({ size }) {
           {
             store.logical.associations.map(association => (
               <Association
+                key={association.id}
                 isDraggable={state.context.payload.drag}
                 cardinalities={association.cardinalities}
                 onCardinalityMove={(cardinality, position) => {
@@ -193,7 +195,7 @@ function LogicalModel({ size }) {
                       const target = store.logical.tables.find(table => table.id === connection.origin.id);
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
                       send({
-                        type: MachineEvents.SEGMENT_START_MOVE,
+                        type: GeralMachineEvents.SEGMENT_START_MOVE,
                         payload: {
                           connection,
                           position,
@@ -214,7 +216,7 @@ function LogicalModel({ size }) {
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
 
                       send({
-                        type: MachineEvents.SEGMENT_END_MOVE,
+                        type: GeralMachineEvents.SEGMENT_END_MOVE,
                         payload: {
                           connection,
                           position,

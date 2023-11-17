@@ -25,10 +25,10 @@ function ConceptualGeralTab() {
 
   const [state, send] = useActor(toolMachineServices);
   const [name, setName] = useState(EMPTY_VALUE)
-  const selectedTarget = getSelectionTarget(state, store);
+  const selectedTarget = getSelectionTarget(state, send, store);
 
   useEffect(() => {
-    if (!selectedTarget || !selectedTarget.target.name)
+    if (!selectedTarget || selectedTarget.target.name === undefined)
     {
       setName(EMPTY_VALUE);
       return;
@@ -106,7 +106,7 @@ function ConceptualGeralTab() {
           id='name' 
           onChange={handleNameChange}
           value={name}
-          isReadOnly={!Boolean(selectedTarget) || !selectedTarget.target.name}
+          isReadOnly={!Boolean(selectedTarget) || selectedTarget.target.name === undefined}
           type='text'/>
 
         <Text>
@@ -201,6 +201,7 @@ function ConceptualGeralTab() {
                 store.conceptual.entities.splice(index, 1);
 
                 const relations = store.conceptual.relations.filter(relation => relation.entitiesIds.includes(id));
+
                 relations.forEach(relation => {
                   Relation.removeParticipantById(relation, id, store.conceptual.connections,);
                   Relation.updateCardinalities(relation, combination => {
@@ -212,12 +213,14 @@ function ConceptualGeralTab() {
                   });
                 })
 
-                const attributes = store.conceptual.attributes.filter(attribute => attribute.owner.id === id);
+                const attributes = store.conceptual.attributes.filter(attribute => attribute.owner?.id === id);
+
                 attributes.forEach(attribute => {
                   attribute.owner = null;
                 });
 
                 const generalizations = store.conceptual.generalizations.filter(generalization => generalization.baseId === id || generalization.derivedsIds.includes(id));
+
                 generalizations.forEach(generalization => {
                   if (generalization.baseId === id)
                   {

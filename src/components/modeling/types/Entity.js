@@ -47,5 +47,4 @@ export default class Entity
   id;
   name;
   canvas;
-  type="entity";
 }

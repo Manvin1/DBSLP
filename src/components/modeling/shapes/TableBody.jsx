@@ -28,6 +28,7 @@ function TableBody({x, y, rowHeight, rowPadding, columnWidth, columnPadding, fon
 
           return (
             <TableDataRow
+              key={column.id}
               y={yOffset}
               height={rowHeight}
               columnPadding={columnPadding}

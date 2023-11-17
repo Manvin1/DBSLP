@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import sqljs from 'sql.js';
 
-import sqlWasmURL from '../assets/sql-wasm.wasm?url';
-
 const GET_ALL_TABLES_STATEMENT = `SELECT name FROM sqlite_schema
 WHERE type='table'`;
 const FIRST_RESULT = 0;
@@ -119,7 +117,7 @@ function useRDBMS()
 
     names.forEach(name => {
       const tableName = name[FIRST_RESULT];
-      const result = dbms.exec(`SELECT * FROM ${tableName}`);
+      const result = dbms.exec(`SELECT * FROM ${tableName};`);
 
       const columns = result[FIRST_RESULT]?.columns || [];
       const rows = result[FIRST_RESULT]?.values || [];

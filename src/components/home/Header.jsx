@@ -49,6 +49,7 @@ function Header() {
               {
                 PAGES.map(pageDetails => (
                   <ListItem
+                    key={pageDetails.id}
                     listStyleType='none'>
                     <ChakraLink 
                         as={NavLink}

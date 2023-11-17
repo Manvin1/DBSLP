@@ -41,7 +41,7 @@ const entityInsertionHandleStageClick = (context, {payload}) => {
 export default Object.freeze({
   entry: entityInsertionEntry,
   on: {
-    [MachineEvents.STAGE_CLICK]: {
+    [MachineEvents.CONCEPTUAL_STAGE_CLICK]: {
       internal: true,
       actions: entityInsertionHandleStageClick,
     }

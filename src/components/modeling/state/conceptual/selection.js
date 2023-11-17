@@ -29,7 +29,7 @@ export const SelectionTypes = Object.freeze({
   generalization: 'generalization',
 });
 
-export function getSelectionTarget(state, store)
+export function getSelectionTarget(state, send, store)
 {
   if (!state.matches('conceptual.selection'))
   {
@@ -68,6 +68,18 @@ export function getSelectionTarget(state, store)
     default: throw Error(`Unknown type ${type}`);
   }
 
+  if(!target)
+  {
+    setTimeout(()=>{
+      send({
+        type: GeralMachineEvents.CLEAR
+      });
+    },0);
+
+
+    return null;
+  }
+
   return {target, type: selections[0].type};
 }
 
@@ -104,6 +116,7 @@ const selectionHandleStageClick = assign({
 
 const selectionHandleClear = assign({
   payload: (context, {payload}) => {
+    console.log('conceptual clear');
     return {
       ...context.payload, 
       selections: [ ]
@@ -412,32 +425,15 @@ const selectionHandleGeneralizationResize = (context, {payload}) => {
   Connection.updateConnections(payload.connections, generalization);
 }
 
-const selectionHandleSegmentStartMove = (context, {payload}) => {
-  const connection = payload.connection;
-  const position = payload.position;
-  const boundingBox = payload.boundingBox;
-
-  Connection.updateStartByPosition(connection, position, boundingBox);
-}
-
-const selectionHandleSegmentEndMove = (context, {payload}) => {
-
-  const connection = payload.connection;
-  const position = payload.position;
-  const boundingBox = payload.boundingBox;
-
-  Connection.updateEndByPosition(connection, position, boundingBox);
-}
-
 export default Object.freeze({
   entry: selectionEntry,
   exit: selectionExit,
   on: {
-    [MachineEvents.STAGE_CLICK]: {
+    [MachineEvents.CONCEPTUAL_STAGE_CLICK]: {
       internal: true,
       actions: selectionHandleStageClick
     },
-    [MachineEvents.KEYBOARD_CLICK]: {
+    [MachineEvents.SELECTION_KEYBOARD_CLICK_CLICK]: {
       internal: true,
       actions: selectionKeyboardClick
     },
@@ -458,22 +454,6 @@ export default Object.freeze({
       actions: selectionHandleEntityResize
     },
     [MachineEvents.ATTRIBUTE_SELECT]: {
-      internal: true,
-      actions: selectionHandleAttributeSelection
-    },
-    [MachineEvents.ATTRIBUTE_DOUBLE_CLICK]: {
-      internal: true,
-      actions: selectionHandleAttributeSelection
-    },
-    [MachineEvents.ATTRIBUTE_MOVE]: {
-      internal: true,
-      actions: selectionHandleAttributeMove
-    },
-    [MachineEvents.ATTRIBUTE_RESIZE]: {
-      internal: true,
-      actions: selectionHandleAttributeResize
-    },
-        [MachineEvents.ATTRIBUTE_SELECT]: {
       internal: true,
       actions: selectionHandleAttributeSelection
     },
@@ -525,22 +505,10 @@ export default Object.freeze({
       internal: true,
       actions: selectionHandleGeneralizationTypeMove
     },
-    [MachineEvents.SEGMENT_START_MOVE]: {
-      internal: true,
-      actions: selectionHandleSegmentStartMove
-    },
-    [MachineEvents.SEGMENT_END_MOVE]: {
-      internal: true,
-      actions: selectionHandleSegmentEndMove,
-    },
     [MachineEvents.CONCEPTUAL_CARDINALITY_MOVE]: {
       internal: true,
       actions: selectionHandleCardinalityMove,
     },
-    [GeralMachineEvents.CLEAR]: {
-      internal: true,
-      actions: selectionHandleClear,
-    }
   }
 });
 

@@ -1,4 +1,4 @@
-import { createMachine } from 'xstate';
+import { assign, createMachine } from 'xstate';
 
 import MachineEvents from './MachineEvents';
 import conceptualAttributeInsertion from './conceptual/attributeInsertion';
@@ -8,6 +8,33 @@ import conceptualRelationInsertion from './conceptual/relationInsertion';
 import conceptualSelection from './conceptual/selection';
 import logicalSelection from './logical/selection';
 import logicalTableInsertion from './logical/tableInsertion';
+import Connection from '../types/Connection';
+
+const handleSegmentStartMove = (context, {payload}) => {
+  const connection = payload.connection;
+  const position = payload.position;
+  const boundingBox = payload.boundingBox;
+
+  Connection.updateStartByPosition(connection, position, boundingBox);
+}
+
+const handleSegmentEndMove = (context, {payload}) => {
+
+  const connection = payload.connection;
+  const position = payload.position;
+  const boundingBox = payload.boundingBox;
+
+  Connection.updateEndByPosition(connection, position, boundingBox);
+}
+
+const handleClear = assign({
+  payload: (context, {payload}) => {
+    return {
+      ...context.payload, 
+      selections: [ ]
+    }
+  }
+});
 
 /**
  * State Machine que gerencia o estado de ferramentas de modelagem conceitual e lógica de banco de dados.
@@ -30,13 +57,6 @@ export default createMachine({
         relationInsertion: conceptualRelationInsertion,
         generalizationInsertion: conceptualGeneralizationInsertion,
       },
-      on: {
-        [MachineEvents.CONCEPTUAL_SELECTION]: 'conceptual.selection',
-        [MachineEvents.CONCEPTUAL_ENTITY_INSERTION]: 'conceptual.entityInsertion',
-        [MachineEvents.CONCEPTUAL_RELATION_INSERTION]: 'conceptual.relationInsertion',
-        [MachineEvents.CONCEPTUAL_ATTRIBUTE_INSERTION]: 'conceptual.attributeInsertion',
-        [MachineEvents.CONCEPTUAL_GENERALIZATION_INSERTION]: 'conceptual.generalizationInsertion',
-      }
     },
     logical: { 
       initial: 'selection',
@@ -47,10 +67,27 @@ export default createMachine({
         selection: logicalSelection,
         tableInsertion: logicalTableInsertion,
       },
-      on: {
-        [MachineEvents.LOGICAl_SELECTION]: 'logical.selection',
-        [MachineEvents.LOGICAl_TABLE_INSERTION]: 'logical.tableInsertion',
-      }
+    },
+  },
+  on: {
+    [MachineEvents.CONCEPTUAL_SELECTION]: 'conceptual.selection',
+    [MachineEvents.CONCEPTUAL_ENTITY_INSERTION]: 'conceptual.entityInsertion',
+    [MachineEvents.CONCEPTUAL_RELATION_INSERTION]: 'conceptual.relationInsertion',
+    [MachineEvents.CONCEPTUAL_ATTRIBUTE_INSERTION]: 'conceptual.attributeInsertion',
+    [MachineEvents.CONCEPTUAL_GENERALIZATION_INSERTION]: 'conceptual.generalizationInsertion',
+    [MachineEvents.LOGICAl_SELECTION]: 'logical.selection',
+    [MachineEvents.LOGICAl_TABLE_INSERTION]: 'logical.tableInsertion',
+    [MachineEvents.SEGMENT_START_MOVE]: {
+      internal: true,
+      actions: handleSegmentStartMove
+    },
+    [MachineEvents.SEGMENT_END_MOVE]: {
+      internal: true,
+      actions: handleSegmentEndMove,
+    },
+    [MachineEvents.CLEAR]: {
+      internal: true,
+      actions: handleClear,
     },
   }
 });

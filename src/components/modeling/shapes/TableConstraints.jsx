@@ -45,6 +45,7 @@ function TableConstraints({x, y, width, rowHeight, rowPadding, columnWidth, colu
 
           return (
             <TableConstraintRow
+              key={constraint.id}
               y={yOffset}
               title={title}
               height={rowHeight}

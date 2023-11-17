@@ -49,7 +49,7 @@ export class Segment
 }
 
 /**
- * Classe que representa uma extremidade de uma conexão.
+ * Classe que representa uma extremidade de uma conexão para uma Figura.
  */
 export class ConnectionTip
 {
@@ -67,8 +67,8 @@ export class ConnectionTip
     this.perimeterOffset = perimeterOffset;
   }
 
-  type;
   id;
+  type;
   perimeterOffset;
 }
 
@@ -548,12 +548,12 @@ export default class Connection
   }
 
   /**
-   * Obter a intersecção entre dois vértices, se alguma.
+   * Obter a intersecção entre dois segmentos, se alguma.
    * 
    * Se não houver intersecção, null é retornado.
    * 
-   * @param {Vertex} lhs 
-   * @param {Vertex} rhs 
+   * @param {Segment} lhs 
+   * @param {Segment} rhs 
    * @returns {Number[] | null}
    */
   static #getIntersection(lhs, rhs)

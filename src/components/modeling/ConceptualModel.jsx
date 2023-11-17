@@ -11,6 +11,7 @@ import Connection from './shapes/Connection';
 import Entity from './shapes/Entity';
 import Generalization from './shapes/Generalization';
 import Relation from './shapes/Relation';
+import GeralMachineEvents from './state/MachineEvents';
 import MachineEvents from './state/conceptual/MachineEvents';
 import CanvasDetails from './types/CanvasDetails';
 import { ConnectionTipsType } from './types/Connection';
@@ -77,7 +78,7 @@ function ConceptualModel({ size }) {
 
   function handleStageClick(e) {
     send({
-      type: MachineEvents.STAGE_CLICK,
+      type: MachineEvents.CONCEPTUAL_STAGE_CLICK,
       payload: {
         store,
         target: e.target,
@@ -406,7 +407,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
 
                       send({
-                        type: MachineEvents.SEGMENT_START_MOVE,
+                        type: GeralMachineEvents.SEGMENT_START_MOVE,
                         payload: {
                           connection,
                           position,
@@ -419,7 +420,7 @@ function ConceptualModel({ size }) {
                       const target = store.conceptual.entities.find(entity => entity.id === connection.origin.id);
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
                       send({
-                        type: MachineEvents.SEGMENT_START_MOVE,
+                        type: GeralMachineEvents.SEGMENT_START_MOVE,
                         payload: {
                           connection,
                           position,
@@ -433,7 +434,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = RelationType.getBoundingBox(target);
 
                       send({
-                        type: MachineEvents.SEGMENT_START_MOVE,
+                        type: GeralMachineEvents.SEGMENT_START_MOVE,
                         payload: {
                           connection,
                           position,
@@ -447,7 +448,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = GeneralizationType.getBoundingBox(target);
 
                       send({
-                        type: MachineEvents.SEGMENT_START_MOVE,
+                        type: GeralMachineEvents.SEGMENT_START_MOVE,
                         payload: {
                           connection,
                           position,
@@ -468,7 +469,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
 
                       send({
-                        type: MachineEvents.SEGMENT_END_MOVE,
+                        type: GeralMachineEvents.SEGMENT_END_MOVE,
                         payload: {
                           connection,
                           position,
@@ -482,7 +483,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
 
                       send({
-                        type: MachineEvents.SEGMENT_END_MOVE,
+                        type: GeralMachineEvents.SEGMENT_END_MOVE,
                         payload: {
                           connection,
                           position,
@@ -496,7 +497,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = CanvasDetails.getBoundingBox(target.canvas);
 
                       send({
-                        type: MachineEvents.SEGMENT_END_MOVE,
+                        type: GeralMachineEvents.SEGMENT_END_MOVE,
                         payload: {
                           connection,
                           position,
@@ -510,7 +511,7 @@ function ConceptualModel({ size }) {
                       const boundingBox = RelationType.getBoundingBox(target);
 
                       send({
-                        type: MachineEvents.SEGMENT_END_MOVE,
+                        type: GeralMachineEvents.SEGMENT_END_MOVE,
                         payload: {
                           connection,
                           position,

@@ -1,5 +1,5 @@
 /**
- * Enum que representa eventos associados ao modo de uma aplicação de modelagem específica.
+ * Enum que representa eventos gerais associados à máquina ou à modelagem.
  */
 export default Object.freeze({
   CONCEPTUAL_SELECTION: 'CONCEPTUAL_SELECTION',
@@ -10,4 +10,6 @@ export default Object.freeze({
   LOGICAl_SELECTION: 'LOGICAl_SELECTION',
   LOGICAl_TABLE_INSERTION: 'LOGICAl_TABLE_INSERTION',
   CLEAR: 'CLEAR',
+  SEGMENT_START_MOVE: 'SEGMENT_START_MOVE',
+  SEGMENT_END_MOVE: 'SEGMENT_END_MOVE',
 });

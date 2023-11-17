@@ -14,8 +14,8 @@ import CanvasDetails from "../../types/CanvasDetails";
 import Cardinality from "../../types/Cardinality";
 import Connection from "../../types/Connection";
 import Table from "../../types/Table";
-import GeralMachineEvents from "../MachineEvents";
 import MachineEvents from "./MachineEvents";
+import GeralMachineEvents from '../MachineEvents';
 
 const RESIZE_MIN_SIZE = 20;
 
@@ -23,7 +23,7 @@ export const SelectionTypes = Object.freeze({
   table: 'table',
 });
 
-export function getSelectionTarget(state, store)
+export function getSelectionTarget(state, send, store)
 {
   if (!state.matches('logical.selection'))
   {
@@ -50,6 +50,17 @@ export function getSelectionTarget(state, store)
     default: throw Error(`Unknown type ${type}`);
   }
 
+  if(!target)
+  {
+    setTimeout(()=>{
+      send({
+        type: GeralMachineEvents.CLEAR
+      });
+    },0);
+    
+    return null;
+  }
+  
   return {target, type: selections[0].type};
 }
 
@@ -86,6 +97,7 @@ const selectionHandleStageClick = assign({
 
 const selectionHandleClear = assign({
   payload: (context, {payload}) => {
+    console.log('logical clear');
     return {
       ...context.payload, 
       selections: [ ]
@@ -166,23 +178,6 @@ const selectionHandleTableResize = (context, {payload}) => {
   Connection.updateConnections(payload.connections, table);
 }
 
-const selectionHandleSegmentStartMove = (context, {payload}) => {
-  const connection = payload.connection;
-  const position = payload.position;
-  const boundingBox = payload.boundingBox;
-
-  Connection.updateStartByPosition(connection, position, boundingBox);
-}
-
-const selectionHandleSegmentEndMove = (context, {payload}) => {
-
-  const connection = payload.connection;
-  const position = payload.position;
-  const boundingBox = payload.boundingBox;
-
-  Connection.updateEndByPosition(connection, position, boundingBox);
-}
-
 const selectionHandleCardinalityMove = (context, {payload}) => {
   const cardinality = payload.cardinality;
 
@@ -193,11 +188,11 @@ export default Object.freeze({
   entry: selectionEntry,
   exit: selectionExit,
   on: {
-    [MachineEvents.STAGE_CLICK]: {
+    [MachineEvents.LOGICAL_STAGE_CLICK]: {
       internal: true,
       actions: selectionHandleStageClick
     },
-    [MachineEvents.KEYBOARD_CLICK]: {
+    [MachineEvents.LOGICAL_KEYBOARD_CLICK]: {
       internal: true,
       actions: selectionKeyboardClick
     },
@@ -217,21 +212,9 @@ export default Object.freeze({
       internal: true,
       actions: selectionHandleTableResize
     },
-    [MachineEvents.SEGMENT_START_MOVE]: {
-      internal: true,
-      actions: selectionHandleSegmentStartMove
-    },
-    [MachineEvents.SEGMENT_END_MOVE]: {
-      internal: true,
-      actions: selectionHandleSegmentEndMove,
-    },
     [MachineEvents.LOGICAL_CARDINALITY_MOVE]: {
       internal: true,
       actions: selectionHandleCardinalityMove,
     },
-    [GeralMachineEvents.CLEAR]: {
-      internal: true,
-      actions: selectionHandleClear,
-    }
   }
 });
