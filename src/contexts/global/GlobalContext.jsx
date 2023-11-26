@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DBMSContextProvider from '../DBMScontext'
+import DBMSContextProvider from '../DBMSContext'
 import AppContextProvider from './AppContext'
 import ThemeProvider from './ThemeProvider'
 
