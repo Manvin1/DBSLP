@@ -55,7 +55,7 @@ function Header() {
           resultArr.push({type:'table',time, result});
         })
   
-        if (history.length > CLEAR_HISTORY_COUNT)
+        if (history.length + resultArr.length > CLEAR_HISTORY_COUNT)
         {
           setHistory(resultArr);
         }

@@ -5,7 +5,7 @@ import { WebsocketProvider } from 'y-websocket';
 import ConceptualStore from "../components/modeling/types/ConceptualStore";
 import LogicalStore from "../components/modeling/types/LogicalStore";
 
-const SOCKET_SERVER = import.meta.env.VITE_SOCKET_SERVER_URL;
+const SOCKET_SERVER = import.meta.env.VITE_NODE_ENV === 'PRODUCTION'? import.meta.env.VITE_SOCKET_SERVER_URL_PROD : import.meta.env.VITE_SOCKET_SERVER_URL_DEV || import.meta.env.VITE_SOCKET_SERVER_URL;
 const DEFAULT_ROOM = '';
 
 const store = syncedStore({
