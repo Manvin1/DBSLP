@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Divider, Flex, IconButton, useDisclosure, useToast } from '@chakra-ui/react';
 
-import { useDBMSContext } from '../../contexts/DBMScontext';
+import { useDBMSContext } from '../../contexts/DBMSContext';
 import { useLabContext } from '../../contexts/LabContext';
 import { HEADER_STATES } from '../../reducers/HeaderReducer';
 import { DoubleArrowBottomIcon, DoubleArrowTopIcon, PlayIcon, TableIcon } from '../utils/Icons';

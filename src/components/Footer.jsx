@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
 
-import { useDBMSContext } from '../contexts/DBMScontext';
+import { useDBMSContext } from '../contexts/DBMSContext';
 import { useAppContext } from '../contexts/global/AppContext';
 import { DatabaseIcon, NetworkIcon, ToolsIcon } from './utils/Icons';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, Flex, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, UnorderedList } from '@chakra-ui/react';
 
-import { useDBMSContext } from '../../contexts/DBMScontext';
+import { useDBMSContext } from '../../contexts/DBMSContext';
 import { getValuesAssociation } from '../modeling/api/combinations';
 
 const MIN_FREQUENCY = 10;

@@ -3,7 +3,7 @@ import React from 'react';
 import Tree, { TreeNode } from 'rc-tree';
 
 import "rc-tree/assets/index.css";
-import { useDBMSContext } from '../../contexts/DBMScontext';
+import { useDBMSContext } from '../../contexts/DBMSContext';
 import { useLabContext } from '../../contexts/LabContext';
 
 /**

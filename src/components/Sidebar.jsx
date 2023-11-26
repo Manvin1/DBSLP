@@ -4,7 +4,7 @@ import { Box, Button, Link as ChakraLink, Flex, FormLabel, IconButton, Input, Li
 import FileSaver from 'file-saver'
 import { NavLink } from 'react-router-dom'
 
-import { useDBMSContext } from '../contexts/DBMScontext'
+import { useDBMSContext } from '../contexts/DBMSContext'
 import { useAppContext } from '../contexts/global/AppContext'
 import { SIDEBAR_STATES } from '../reducers/sidebarReducer'
 import { DatabaseIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, FileDatabaseIcon, HomeIcon, LabIcon, ModelingIcon, NetworkIcon, SeparatorIcon, ToolsIcon } from './utils/Icons'
