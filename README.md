@@ -12,7 +12,7 @@ DBSLP provê as seguintes funcionalidades:
 
 - Criação de sessões colaborativas, possibilitando que diversos computadores compartilhem um mesmo ambiente de modelagem.
 
-# Como usar
+# Como testar
 
 O sistema é dividido em dois ambientes, a aplicação do cliente e um servidor de broadcast para as sessões colaborativas.
 
@@ -29,10 +29,20 @@ Para testar em desenvolvimento
 
 1. Criar um arquivo .env na raiz do projeto conforme especificado em '.copy.env'.
 2. Garantir que VITE_NODE_ENV em .env é 'DEVELOPMENT'.
-3. Caso se queira sessões compartilhadas, é necessário lançar um servidor de broadcast, ao qual seu URL deve ser definido no .env. Por exemplo, no modo de desenvolvimento:
+3. Caso se queira sessões compartilhadas, é necessário lançar um [servidor de broadcast](https://github.com/Manvin1/dbslp-y-websocket), ao qual seu URL deve ser definido no .env. Por exemplo, no modo de desenvolvimento:
    
     VITE_SOCKET_SERVER_URL = ws://localhost:myPort
 
 4. Lançar o servidor do cliente, que executará, por padrão, na porta 5173.
 
     npm run dev
+
+# Sobre o Servidor de Broadcast
+
+DBSLP usa o servidor provido pela equipe do yjs como servidor de broadcast, ao qual o fork pode ser encontrado [aqui](https://github.com/Manvin1/dbslp-y-websocket).
+
+# Live Demo
+
+A aplicação do cliente pode ser acessada [aqui](https://dbslp.netlify.app/).
+
+O servidor de broadcast usado foi [este](https://api-dbslp.onrender.com/).
