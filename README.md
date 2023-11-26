@@ -28,12 +28,15 @@ Para obter o projeto
 Para testar em desenvolvimento
 
 1. Criar um arquivo .env na raiz do projeto conforme especificado em '.copy.env'.
-2. Garantir que VITE_NODE_ENV em .env é 'DEVELOPMENT'.
-3. Caso se queira sessões compartilhadas, é necessário lançar um [servidor de broadcast](https://github.com/Manvin1/dbslp-y-websocket), ao qual seu URL deve ser definido no .env. Por exemplo, no modo de desenvolvimento:
+2. Instalar as dependências
+   
+   npm install
+3. Garantir que VITE_NODE_ENV em .env é 'DEVELOPMENT'.
+4. Caso se queira sessões compartilhadas, é necessário lançar um [servidor de broadcast](https://github.com/Manvin1/dbslp-y-websocket), ao qual seu URL deve ser definido no .env. Por exemplo, no modo de desenvolvimento:
    
     VITE_SOCKET_SERVER_URL = ws://localhost:myPort
 
-4. Lançar o servidor do cliente, que executará, por padrão, na porta 5173.
+5. Lançar o servidor do cliente, que executará, por padrão, na porta 5173.
 
     npm run dev
 
