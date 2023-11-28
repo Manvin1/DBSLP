@@ -75,6 +75,11 @@ export function getAllCombinations(arr)
   const combinations = [];
   const result = getCombinations(arr);
 
+  if (!result)
+  {
+    return result;
+  }
+
   for(let i = 0; i < result.length; ++i)
   {
     let [lhs, _] = result[i];
@@ -131,6 +136,11 @@ export function getValuesAssociation(columns, rows)
   {
     const rotuledRow = rotule(row, columns);
     const combinations = getAllCombinations(rotuledRow);
+
+    if (!combinations)
+    {
+      continue;
+    }
 
     for(const [lhs, rhs] of combinations)
     {
