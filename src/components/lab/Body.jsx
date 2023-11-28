@@ -58,13 +58,15 @@ function Body() {
 
   return (
     <Flex
+      overflow='hidden'
       borderTop='1px solid'
       borderTopColor='secondaryFg'
       flexDir={{
         base: 'column',
         lg: 'row'
       }}
-      flex='1'>
+      flex='1'
+      flexBasis='0'>
       <SQLEditor />
 
       <Flex
