@@ -43,9 +43,3 @@ Para testar em desenvolvimento
 # Sobre o Servidor de Broadcast
 
 DBSLP usa o servidor provido pela equipe do yjs como servidor de broadcast, ao qual o fork pode ser encontrado [aqui](https://github.com/Manvin1/dbslp-y-websocket).
-
-# Live Demo
-
-A aplicação do cliente pode ser acessada [aqui](https://dbslp.netlify.app/).
-
-O servidor de broadcast usado foi [este](https://api-dbslp.onrender.com/).
